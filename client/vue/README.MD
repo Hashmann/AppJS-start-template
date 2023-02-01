@@ -1,26 +1,27 @@
-<h1 align="center">VueJS App template</h1>
+<h1 style="text-align: center;">VueJS App template</h1>
 
-<p align="center">
+<p style="text-align: center;">
   <img src="vue.ico"  alt="Vue image">
 </p>
 
-<p align="center">
-
-[//]: # (   <img src="https://img.shields.io/badge/Laravel-9-green" alt="Laravel Version">)
-[//]: # (   <img src="https://img.shields.io/badge/Vue-3-green" alt="VueJS Version">)
+<p style="text-align: center;">
+   <img src="https://img.shields.io/badge/Vue-3-green" alt="VueJS Version">
    <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
+***
 ## About
 
 About Text Here
 
+***
 ## Features
 <ul>
 <li>Login, register, email verification and password reset</li>
 <li>Authentication with JWT</li>
 </ul>
 
+***
 ## Installation
 ```
 composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
@@ -49,8 +50,7 @@ composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
 
 ## License
 
-[//]: # (The Laravel framework is open-sourced software licensed under the [MIT license]&#40;https://opensource.org/licenses/MIT&#41;.)
+[MIT license](https://opensource.org/licenses/MIT)
 
-## Readme
-- [server readme.md](https://github.com/Hashmann/express-server-base-template/tree/master/server)
-- [client readme.md](https://github.com/Hashmann/express-server-base-template/tree/master/client)
+***
+<p style="text-align: center;">2023</p>

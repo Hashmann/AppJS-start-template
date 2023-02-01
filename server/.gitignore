@@ -1,4 +1,6 @@
 /.env
+!/log/
 /log/*
+!/uploads/
 /uploads/*
 /node_modules/
