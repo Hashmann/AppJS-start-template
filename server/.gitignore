@@ -2,5 +2,5 @@
 /log/*
 !log/log.txt
 /uploads/*
-!uploads/
+!uploads/upload.txt
 /node_modules/
