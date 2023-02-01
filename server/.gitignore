@@ -1,6 +1,6 @@
 /.env
-!/log/
+!/log/log.txt
 /log/*
-!/uploads/
+!/uploads/upload.txt
 /uploads/*
 /node_modules/
