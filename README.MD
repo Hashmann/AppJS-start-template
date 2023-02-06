@@ -1,57 +1,59 @@
-<h1 align="center">App template</h1>
+<h1 style="text-align: center">App template</h1>
 
-<p align="center">
+<p style="align-content: center">
   <img src="./server/express.webp"  alt="Project">
 </p>
 
-<p align="center">
-
-[//]: # (   <img src="https://img.shields.io/badge/Laravel-9-green" alt="Laravel Version">)
-[//]: # (   <img src="https://img.shields.io/badge/Vue-3-green" alt="VueJS Version">)
+<p style="text-align: center">
+   <img src="https://img.shields.io/badge/Express-4-green" alt="VueJS Version">
+   <img src="https://img.shields.io/badge/Vue-3-green" alt="VueJS Version">
+   <img src="https://img.shields.io/badge/React-18-green" alt="VueJS Version">
+   <img src="https://img.shields.io/badge/MongoDB-green" alt="VueJS Version">
    <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
+***
 ## About
 
 About Text Here
 
+***
 ## Features
 <ul>
 <li>Login, register, email verification and password reset</li>
 <li>Authentication with JWT</li>
 </ul>
 
+***
 ## Installation
-```
-composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
-```
-<ul>
-<li><code>composer create-project --prefer-dist cretueusebiu/laravel-vue-spa</code></li>
-<li>Edit <code>.env</code> and set your database connection details</li>
-<li>(When installed via git clone or download, run <code>php artisan key:generate</code> and <code>php artisan jwt:secret</code>)</li>
-<li><code>php artisan migrate</code></li>
-<li><code>npm install</code></li>
-</ul>
 
-## Usage
-### Development
-<code>npm run dev</code>
+<details>
+  <summary>Backend</summary>
 
-### Production
-<code>npm run build</code>
+[Readme](https://github.com/Hashmann)
 
-### Testing
-<code>npm run test</code>
+  ```javascript
+  console.log("I'm a code block!")
+  ```
+</details>
 
+<details>
+  <summary>Frontend</summary>
+
+- [VueJS](https://github.com/Hashmann)
+- [React](https://github.com/Hashmann)
+  ```javascript
+  console.log("I'm a code block!")
+  ```
+</details>
+
+***
 ## Developers
 
-[//]: # (- [Yarkov Vyacheslav]&#40;https://github.com/Hashmann&#41;)
 [Yarkov Vyacheslav](https://github.com/Hashmann)
 
+***
 ## License
-
-[//]: # (The Laravel framework is open-sourced software licensed under the [MIT license]&#40;https://opensource.org/licenses/MIT&#41;.)
-
-## Readme
-- [server readme.md](https://github.com/Hashmann/express-server-base-template/tree/master/server)
-- [client readme.md](https://github.com/Hashmann/express-server-base-template/tree/master/client)
+[MIT license](https://opensource.org/licenses/MIT)
+***
+<p style="text-align: center;">2023</p>

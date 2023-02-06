@@ -1,4 +1,6 @@
 /.env
 /log/*
+!log/log.txt
 /uploads/*
+!uploads/upload.txt
 /node_modules/

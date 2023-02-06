@@ -1,18 +1,16 @@
-<h1 align="center">Express server template for a quick start of development</h1>
+<h1 style="text-align: center;">Express server template for a quick start of development</h1>
 
-<p align="center">
-  <img src="express.webp"  alt="Project">
+<p style="text-align: center;">
+  <img src="express.webp"  alt="Express">
 </p>
 
-<p align="center">
-
-[//]: # (   <img src="https://img.shields.io/badge/Laravel-9-green" alt="Laravel Version">)
-[//]: # (   <img src="https://img.shields.io/badge/Vue-3-green" alt="VueJS Version">)
+<p style="text-align: center;">
+   <img src="https://img.shields.io/badge/Express-4-green" alt="Express Version">
+   <img src="https://img.shields.io/badge/MongoDB-green" alt="MongoDB">
    <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
 ***
-
 <details>
   <summary>Spoiler warning</summary>
 
@@ -27,12 +25,14 @@ Spoiler text. Note that it's important to have a space after the summary tag. Yo
 
 About Text Here
 
+***
 ## Features
 <ul>
 <li>Login, register, email verification and password reset</li>
 <li>Authentication with JWT</li>
 </ul>
 
+***
 ## Installation
 ```
 composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
@@ -45,6 +45,7 @@ composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
 <li><code>npm install</code></li>
 </ul>
 
+***
 ## Usage:
 <details>
   <summary>Testing</summary>
@@ -64,15 +65,8 @@ composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
 <code>npm run build</code>
 </details>
 
-## Developer
-[Yarkov Vyacheslav](https://github.com/Hashmann)
-
-## License
-
-[MIT license](https://opensource.org/licenses/MIT)
-
-##Dependencies:
-
+***
+## Dependencies:
 <details>
   <summary>Build</summary>
 
@@ -90,3 +84,13 @@ composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
 - [Nodemon](https://www.npmjs.com/package/nodemon) ^2.0.20
 </details>
 
+***
+## Developer
+[Yarkov Vyacheslav](https://github.com/Hashmann)
+
+***
+## License
+[MIT license](https://opensource.org/licenses/MIT)
+
+***
+<p style="text-align: center;">2023</p>
