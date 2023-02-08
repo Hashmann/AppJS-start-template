@@ -1,17 +1,16 @@
 import nodemailer from 'nodemailer'
+import * as dotenv from 'dotenv'
 
 class MailService{
   constructor() {
+    dotenv.config()
     this.transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
-      // host: 'smtp.gmail.com',
       port: process.env.SMTP_PORT,
       secure: false,
       auth: {
         user: process.env.SMTP_USER,
-        // user: '',
         pass: process.env.SMTP_PASSWORD
-        // pass: ''
       },
       tls: {rejectUnauthorized:false}
     })

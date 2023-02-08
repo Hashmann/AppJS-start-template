@@ -6,12 +6,13 @@ import mongoose from 'mongoose'
 
 import { apiRoutes } from './router/routes.js'
 import { Logger } from './utils/logger.js'
+import { swaggerSpec } from './utils/swagger.js'
+import swaggerUi from 'swagger-ui-express'
 
 //Middleware
 import errorMiddleware from './middlewares/error-middleware.js'
 
 dotenv.config()
-
 const PORT = process.env.PORT || 5000
 const MONGO_URI = process.env.MONGO_URI
 const DB_NAME = process.env.DB_NAME
@@ -24,6 +25,7 @@ app.use(cors())
 app.use(errorMiddleware)
 // Routes
 app.use('/api', apiRoutes)
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {explorer: true}))
 
 
 mongoose.set('strictQuery', true)
