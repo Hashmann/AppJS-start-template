@@ -8,3 +8,18 @@ routes.use('/user', userRouter)
 
 
 export const apiRoutes = routes
+
+
+/**
+ * @swagger
+ * tags:
+ *  name: User
+ *  description: The users managing API
+ * */
+
+/**
+ * @swagger
+ * tags:
+ *  name: Tokens
+ *  description: The tokens managing API
+ * */

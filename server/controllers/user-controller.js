@@ -10,7 +10,8 @@ class UserController {
       Logger.info(`User ${email} created`,'',`${req.ip}`,'DONE','v')
       return res.json({...userData, message: `Пользователь ${email} был успешно зарегистрирован`})
     } catch (err) {
-      logger('err', 'Registration Error', err, '', `${req.ip}`, '', 'x')
+      Logger.error('Registration Error', 'user-controller',`${req.ip}`,err,'')
+      console.log('LLLLOOOGGGG', process.env.SMTP_HOST)
       next(err)
     }
   }
@@ -39,7 +40,7 @@ class UserController {
       Logger.info(`User ${req.email} activated account`, '',`${req.ip}`, 'DONE', 'v')
       return res.redirect(process.env.CLIENT_URL)
     } catch (err) {
-      logger('err', '', err, '',`${req.ip}`, '', 'x')
+      Logger.error('', 'user-controller', `${req.ip}`, err, '')
       next(err)
     }
   }
