@@ -9,27 +9,25 @@ import { Logger } from './utils/logger.utils.js'
 import { swaggerSpec } from './utils/swagger.utils.js'
 import swaggerUi from 'swagger-ui-express'
 
-//Middleware
 import errorMiddleware from './middlewares/error.middleware.js'
 
 dotenv.config({ path: `.env${process.env.NODE_ENV}` })
 const PORT = process.env.PORT || 5000
 const MONGO_HOST = process.env.MONGO_DB_HOST
 const MONGO_NAME = process.env.MONGO_DB_NAME
+mongoose.set('strictQuery', true)
 
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors())
 
-app.use(errorMiddleware)
 // Routes
 app.use('/api', apiRoutes)
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {explorer: true}))
 
-
-mongoose.set('strictQuery', true)
-
+//Middlewares
+app.use(errorMiddleware)
 // Launch server
 const start = async () => {
 	try {

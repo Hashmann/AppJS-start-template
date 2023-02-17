@@ -1,6 +1,6 @@
 import Router from 'express'
 import { userController } from '../controllers/user.controller.js'
-// import {registerValidation, loginValidation} from '../validations/user.validation.js'
+import {registerValidation, loginValidation} from '../validations/user.validation.js'
 import handleValidationErrors from '../middlewares/handleValidationErrors.js'
 // import checkAuth from "../middlewares/checkAuth.js";
 const router = new Router()
@@ -73,9 +73,9 @@ const router = new Router()
  *      500:
  *        description: Unexpected error
  * */
-router.post('/register', userController.register)
+router.post('/register', registerValidation, userController.register)
 
-// router.post('/login', loginValidation, handleValidationErrors, authController.login)
+router.post('/login', loginValidation, userController.login)
 // router.post('/logout', authController.logout)
 /**
  * @swagger

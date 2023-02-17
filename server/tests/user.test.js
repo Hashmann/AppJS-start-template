@@ -61,7 +61,7 @@ describe('Test Request:', (object, method) => {
 })
 
 describe('User:', (object, method) => {
-	it('Registration a new user', (done) => {
+	it('Registration a new test user', (done) => {
 		// 	// 1 - 200 status code; 2 - check email was sent
 		// 	// expect.assertions(2)
 		//
@@ -85,12 +85,13 @@ describe('User:', (object, method) => {
 		expect(user.email).toBe(userData.email)
 	})
 
-	// it('Test user login', async () => {
-	// 	const regUser = await userController.register(userData)
-	// 	const regUser = await userService.register(userData.email, userData.password)
-	// 	expect(regUser._id).toBeDefined()
-	// 	expect(regUser.email).toBe(userData.email)
-	// })
+	it('Logged in test user',  (done) => {
+		request(app)
+			.post('/api/user/login')
+			.send({email: userData.email, password: userData.password})
+			.set('Accept', 'application/json')
+			.expect(200, done)
+	})
 
 	it('Deleting a user from the database', async () => {
 		const user = await UserModel.findOneAndDelete({email})
