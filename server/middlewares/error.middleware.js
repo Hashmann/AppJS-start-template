@@ -1,4 +1,4 @@
-import {ApiError} from '../exceptions/api.error.js'
+import { ApiError } from '../exceptions/api.error.js'
 
 export default function(err, req, res, next) {
   console.log(err)
@@ -12,3 +12,4 @@ export default function(err, req, res, next) {
     message: 'Непредвиденная ошибка'
   })
 }
+

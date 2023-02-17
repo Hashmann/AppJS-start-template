@@ -1,10 +1,16 @@
 import { userService } from '../service/user.service.js'
 import { Logger } from '../utils/logger.utils.js'
+import { validationResult } from 'express-validator'
+import { ApiError } from '../exceptions/api.error.js'
 import UserModel from '../models/User.js'
 
 class UserController {
   async register(req, res, next) {
     try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) {
+        return next(ApiError.BadRequest('Validation error', errors.array()))
+      }
       const { email, password } = req.body
       const userData = await userService.register(email, password)
       res.cookie('refresh_token', userData.refreshToken, {maxAge: 30 * 24 * 60 * 1000, httpOnly: true})
@@ -18,7 +24,11 @@ class UserController {
 
   async login(req, res, next) {
     try {
-
+      const {email, password} = req.body
+      const userData = await userService.login(email, password)
+      res.cookie('refresh_token', userData.refreshToken, {maxAge: 30 * 24 * 60 * 1000, httpOnly: true})
+      Logger.info(`User ${email} logged in`,'',`${req.ip}`,'DONE','v')
+      return res.json({...userData, message: `Пользователь ${email} был успешно залогинен`})
     } catch (err) {
       next(err)
     }

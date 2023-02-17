@@ -10,15 +10,12 @@
    <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
-***
-
 <div align="center"><h2>About</h2></div>
 About Text Here.
 
 API documentation is available at `http://localhost:5000/api/docs` after starting server in **dev mode**.
 You can also read the documentation `/server/docs/api-documentation.pdf`
 
-***
 <div align="center"><h2>Features</h2></div>
 
 <ul>
@@ -26,10 +23,9 @@ You can also read the documentation `/server/docs/api-documentation.pdf`
 <li>Authentication with JWT</li>
 <li>Roles and permissions user</li>
 <li>Swagger is used for API documentation</li>
-<li>For unit testing, jest is used</li>
+<li>Jest is used for unit testing</li>
 </ul>
 
-***
 <div align="center"><h2>Installation</h2></div>
 
 ```
@@ -41,7 +37,6 @@ composer create-project --prefer-dist laravel-vue-spa
 <li><code>npm install</code></li>
 </ul>
 
-***
 <div align="center"><h2>Usage</h2></div>
 
 <details>
@@ -64,7 +59,6 @@ Edit <code>.env.test</code> and set your test database connection details and ot
 <code>npm run start</code>
 </details>
 
-***
 <div align="center"><h2>Dependencies</h2></div>
 
 <details>
@@ -84,12 +78,10 @@ Edit <code>.env.test</code> and set your test database connection details and ot
 - [Nodemon](https://www.npmjs.com/package/nodemon) ^2.0.20
 </details>
 
-***
 <div align="center"><h2>Developer</h2></div>
 
 [Yarkov Vyacheslav](https://github.com/Hashmann)
 
-***
 <div align="center"><h2>License</h2></div>
 
 [MIT license](https://opensource.org/licenses/MIT)
