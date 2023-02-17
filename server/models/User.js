@@ -67,6 +67,10 @@ import mongoose from 'mongoose'
  *         activationLink:
  *           type: string
  *           description: The user's activation link.
+ *         activatedAt:
+ *            type: string
+ *            format: date-time
+ *            description: Date and time activated account
  *         isOnline:
  *           type: boolean
  *           default: false
@@ -99,6 +103,7 @@ const UserSchema = new mongoose.Schema({
 
       isActivated: {type: Boolean, default: false},
       activationLink: {type: String},
+      activatedAt: {type: String},
     },
     {
       timestamps: true,

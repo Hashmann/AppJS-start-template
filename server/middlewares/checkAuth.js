@@ -1,5 +1,5 @@
 // import jwt from 'jsonwebtoken'
-// import {logger} from '../utils/logger.js'
+// import {logger} from '../utils/logger.utils.js'
 // import config from "config";
 //
 // export default (req, res, next) => {

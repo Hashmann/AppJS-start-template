@@ -9,6 +9,16 @@
    <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
+<details>
+  <summary>Spoiler warning</summary>
+
+Spoiler text. Note that it's important to have a space after the summary tag. You should be able to write any markdown you want inside the `<details>` tag... just make sure you close `<details>` afterward.
+
+  ```javascript
+  console.log("I'm a code block!");
+  ```
+</details>
+
 ***
 ## About
 
@@ -24,10 +34,10 @@ About Text Here
 ***
 ## Installation
 ```
-composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
+composer create-project --prefer-dist laravel-vue-spa
 ```
 <ul>
-<li><code>composer create-project --prefer-dist cretueusebiu/laravel-vue-spa</code></li>
+<li><code>composer create-project --prefer-dist laravel-vue-spa</code></li>
 <li>Edit <code>.env</code> and set your database connection details</li>
 <li>(When installed via git clone or download, run <code>php artisan key:generate</code> and <code>php artisan jwt:secret</code>)</li>
 <li><code>php artisan migrate</code></li>

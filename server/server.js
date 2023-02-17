@@ -5,17 +5,17 @@ import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 
 import { apiRoutes } from './router/routes.js'
-import { Logger } from './utils/logger.js'
-import { swaggerSpec } from './utils/swagger.js'
+import { Logger } from './utils/logger.utils.js'
+import { swaggerSpec } from './utils/swagger.utils.js'
 import swaggerUi from 'swagger-ui-express'
 
 //Middleware
-import errorMiddleware from './middlewares/error-middleware.js'
+import errorMiddleware from './middlewares/error.middleware.js'
 
-dotenv.config()
+dotenv.config({ path: `.env${process.env.NODE_ENV}` })
 const PORT = process.env.PORT || 5000
-const MONGO_URI = process.env.MONGO_URI
-const DB_NAME = process.env.DB_NAME
+const MONGO_HOST = process.env.MONGO_DB_HOST
+const MONGO_NAME = process.env.MONGO_DB_NAME
 
 const app = express()
 app.use(express.json())
@@ -34,11 +34,11 @@ mongoose.set('strictQuery', true)
 const start = async () => {
 	try {
 		// Connect DB
-		await mongoose.connect(`${MONGO_URI}/${DB_NAME}`)
+		await mongoose.connect(`${MONGO_HOST}/${MONGO_NAME}`)
 			.then(() => Logger.info('MongoDB server status','','','CONNECTING','v'))
 			.catch((err) => Logger.error('DB Error','','',err,''))
 		app.listen(PORT, () => {
-			Logger.info(`Server started on port:`, `${PORT}`, '','DONE', 'v')
+			Logger.info(`Server started on port:`, `${PORT}`, `${process.env.MODE}`,'DONE', 'v')
 		})
 	} catch (err) {
 		Logger.error('Server error', '','',err,'SERVER DOWN')

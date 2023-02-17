@@ -1,10 +1,10 @@
-<h1 style="text-align: center">App template</h1>
+<h1 align="center">App template</h1>
 
-<p style="align-content: center">
+<p align="center">
   <img src="./server/express.webp"  alt="Project">
 </p>
 
-<p style="text-align: center">
+<p align="center">
    <img src="https://img.shields.io/badge/Express-4-green" alt="VueJS Version">
    <img src="https://img.shields.io/badge/Vue-3-green" alt="VueJS Version">
    <img src="https://img.shields.io/badge/React-18-green" alt="VueJS Version">
@@ -13,19 +13,22 @@
 </p>
 
 ***
-## About
+<div align="center"><h2>About</h2></div>
 
 About Text Here
 
+API documentation is available at `http://localhost:5000/api/docs` after starting server in **dev mode**.
+You can also read the documentation `/server/docs/api-documentation.pdf`
+
 ***
-## Features
+<div align="center"><h2>Features</h2></div>
 <ul>
 <li>Login, register, email verification and password reset</li>
 <li>Authentication with JWT</li>
 </ul>
 
 ***
-## Installation
+<div align="center"><h2>Installation</h2></div>
 
 <details>
   <summary>Backend</summary>
@@ -48,12 +51,13 @@ About Text Here
 </details>
 
 ***
-## Developers
+<div align="center"><h2>Developers</h2></div>
 
 [Yarkov Vyacheslav](https://github.com/Hashmann)
 
 ***
-## License
+<div align="center"><h2>License</h2></div>
+
 [MIT license](https://opensource.org/licenses/MIT)
 ***
-<p style="text-align: center;">2023</p>
+<p align="center">2023</p>

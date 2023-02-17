@@ -1,54 +1,53 @@
-<h1 style="text-align: center;">Express server template for a quick start of development</h1>
+<h1 align="center">Express server template for a quick start of development</h1>
 
-<p style="text-align: center;">
+<p align="center">
   <img src="express.webp"  alt="Express">
 </p>
 
-<p style="text-align: center;">
+<p align="center">
    <img src="https://img.shields.io/badge/Express-4-green" alt="Express Version">
    <img src="https://img.shields.io/badge/MongoDB-green" alt="MongoDB">
    <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
 ***
-<details>
-  <summary>Spoiler warning</summary>
 
-Spoiler text. Note that it's important to have a space after the summary tag. You should be able to write any markdown you want inside the `<details>` tag... just make sure you close `<details>` afterward.
+<div align="center"><h2>About</h2></div>
+About Text Here.
 
-  ```javascript
-  console.log("I'm a code block!");
-  ```
-</details>
-
-## About
-
-About Text Here
+API documentation is available at `http://localhost:5000/api/docs` after starting server in **dev mode**.
+You can also read the documentation `/server/docs/api-documentation.pdf`
 
 ***
-## Features
+<div align="center"><h2>Features</h2></div>
+
 <ul>
 <li>Login, register, email verification and password reset</li>
 <li>Authentication with JWT</li>
+<li>Roles and permissions user</li>
+<li>Swagger is used for API documentation</li>
+<li>For unit testing, jest is used</li>
 </ul>
 
 ***
-## Installation
+<div align="center"><h2>Installation</h2></div>
+
 ```
-composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
+composer create-project --prefer-dist laravel-vue-spa
 ```
 <ul>
-<li><code>composer create-project --prefer-dist cretueusebiu/laravel-vue-spa</code></li>
-<li>Edit <code>.env</code> and set your database connection details</li>
-<li>(When installed via git clone or download, run <code>php artisan key:generate</code> and <code>php artisan jwt:secret</code>)</li>
-<li><code>php artisan migrate</code></li>
+<li><code>composer create-project --prefer-dist laravel-vue-spa</code></li>
+<li>Edit <code>.env.production</code> and <code>.env.development</code> and set your database connection details and other settings</li>
 <li><code>npm install</code></li>
 </ul>
 
 ***
-## Usage:
+<div align="center"><h2>Usage</h2></div>
+
 <details>
   <summary>Testing</summary>
+
+Edit <code>.env.test</code> and set your test database connection details and other settings.
 
 <code>npm run test</code>
 </details>
@@ -56,19 +55,20 @@ composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
 <details>
   <summary>Development</summary>
 
-<code>npm run dev</code>
+<code>npm run start:dev</code>
 </details>
 
 <details>
   <summary>Production</summary>
 
-<code>npm run build</code>
+<code>npm run start</code>
 </details>
 
 ***
-## Dependencies:
+<div align="center"><h2>Dependencies</h2></div>
+
 <details>
-  <summary>Build</summary>
+  <summary>Production</summary>
 
 - [Express](https://expressjs.com/) ^4.18.2
 - [Cors (npm)](https://www.npmjs.com/package/cors) ^2.8.5
@@ -79,18 +79,20 @@ composer create-project --prefer-dist cretueusebiu/laravel-vue-spa
 </details>
 
 <details>
-  <summary>Dev</summary>
+  <summary>Development</summary>
 
 - [Nodemon](https://www.npmjs.com/package/nodemon) ^2.0.20
 </details>
 
 ***
-## Developer
+<div align="center"><h2>Developer</h2></div>
+
 [Yarkov Vyacheslav](https://github.com/Hashmann)
 
 ***
-## License
+<div align="center"><h2>License</h2></div>
+
 [MIT license](https://opensource.org/licenses/MIT)
 
 ***
-<p style="text-align: center;">2023</p>
+<p align="center">2023</p>

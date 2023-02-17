@@ -1,9 +1,10 @@
 import nodemailer from 'nodemailer'
 import * as dotenv from 'dotenv'
 
+dotenv.config({ path: `.env${process.env.NODE_ENV}` })
+
 class MailService{
   constructor() {
-    dotenv.config()
     this.transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
@@ -19,7 +20,7 @@ class MailService{
     await this.transporter.sendMail({
       from: process.env.SMTP_USER,
       to: to,
-      subject: 'Activation account' + process.env.API_URL,
+      subject: 'Activation account ' + process.env.API_URL,
       text: '',
       html:
           `

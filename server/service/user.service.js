@@ -1,11 +1,11 @@
 import UserModel from '../models/User.js'
 import bcrypt from 'bcrypt'
 import { v4 as uuidv4 } from 'uuid'
-import { mailService } from './mail-service.js'
-import { tokenService } from './token-service.js'
-import { UserDto } from '../dtos/user-dto.js'
-import { ApiError } from '../exceptions/api-error.js'
-import { Logger } from '../utils/logger.js'
+import { mailService } from './mail.service.js'
+import { tokenService } from './token.service.js'
+import { UserDto } from '../dtos/user.dto.js'
+import { ApiError } from '../exceptions/api.error.js'
+import { Logger } from '../utils/logger.utils.js'
 
 class UserService{
   async register(email, password) {
@@ -43,6 +43,7 @@ class UserService{
       activationLink: activationLink,
     },{
       isActivated: true,
+      activatedAt: (new Date()).toISOString().slice(0,50),
     })
     return user
   }
