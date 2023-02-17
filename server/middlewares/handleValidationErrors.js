@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator'
-import { Logger } from '../utils/logger.js'
+import { Logger } from '../utils/logger.utils.js'
 
 export default (req, res, next) => {
   const errors = validationResult(req)

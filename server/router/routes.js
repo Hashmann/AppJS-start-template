@@ -1,4 +1,4 @@
-import { userRouter } from './userRouter.js'
+import { userRouter } from './user.router.js'
 import express from 'express'
 
 const routes = express.Router()

@@ -1,6 +1,6 @@
 import Router from 'express'
-import { userController } from '../controllers/user-controller.js'
-// import {registerValidation, loginValidation} from '../validations/userValidation.js'
+import { userController } from '../controllers/user.controller.js'
+// import {registerValidation, loginValidation} from '../validations/user.validation.js'
 import handleValidationErrors from '../middlewares/handleValidationErrors.js'
 // import checkAuth from "../middlewares/checkAuth.js";
 const router = new Router()
@@ -98,20 +98,24 @@ router.get('/activate/:link', userController.activate)
 /**
  * @swagger
  * /api/user/test:
- *   get:
- *     summary: Test Request.
- *     tags: [User]
- *     description: Test Request.
- *     responses:
- *       200:
- *         description: A list of users.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
+ *  get:
+ *    summary: Test Request.
+ *    tags: [User]
+ *    description: Test Request.
+ *    responses:
+ *      200:
+ *        description: Test response.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *
  *
  */
-router.get('/test', userController.getUsers)
+router.get('/test', userController.testGetRequest)
+router.post('/test', userController.testPostRequest)
 
 export const userRouter = router
