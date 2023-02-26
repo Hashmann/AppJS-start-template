@@ -10,10 +10,17 @@
    <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
-<div align="center"><h2>About</h2></div>
-About Text Here.
+<div align="center"><h2>About[^1]</h2></div>
 
-API documentation is available at `http://localhost:5000/api/docs` after starting server in **dev mode**.
+About[^1]
+
+
+```
+About Text Here.
+```
+> Text that is a quote
+
+API documentation is available at `http://localhost:5000/api/docs` after starting server in **dev mode** <code>npm run start:dev</code>.
 You can also read the documentation `/server/docs/api-documentation.pdf`
 
 <div align="center"><h2>Features</h2></div>
@@ -22,19 +29,39 @@ You can also read the documentation `/server/docs/api-documentation.pdf`
 <li>Login, register, email verification and password reset</li>
 <li>Authentication with JWT</li>
 <li>Roles and permissions user</li>
-<li>Swagger is used for API documentation</li>
-<li>Jest is used for unit testing</li>
 </ul>
+
+<div align="center"><h2>TODO</h2></div>
+
+<details>
+  <summary>List one</summary>
+
+- [ ] Todo1
+- [ ] Todo2
+- [ ] Todo3
+</details>
+
+<details>
+  <summary>List two</summary>
+
+- [ ] Todo4
+- [ ] Todo5
+- [ ] Todo6
+</details>
+
+- [x] Add delight to the experience when all tasks are complete :tada:
+
 
 <div align="center"><h2>Installation</h2></div>
 
 ```
-composer create-project --prefer-dist laravel-vue-spa
+git clone https://github.com/Hashmann/AppJS-start-template.git
 ```
 <ul>
-<li><code>composer create-project --prefer-dist laravel-vue-spa</code></li>
-<li>Edit <code>.env.production</code> and <code>.env.development</code> and set your database connection details and other settings</li>
+<li><code></code></li>
+<li>Edit <code>.env.production</code> <code>.env.development</code> and set your database connection details and other settings</li>
 <li><code>npm install</code></li>
+<li><code>npm run migrate</code></li>
 </ul>
 
 <div align="center"><h2>Usage</h2></div>
@@ -87,4 +114,7 @@ Edit <code>.env.test</code> and set your test database connection details and ot
 [MIT license](https://opensource.org/licenses/MIT)
 
 ***
-<p align="center">2023</p>
+<div align="center"><sub align="center">2023</sub></div>
+
+[^1]: About.
+

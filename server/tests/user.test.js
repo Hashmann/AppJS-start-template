@@ -17,7 +17,6 @@ import swaggerUi from "swagger-ui-express";
 import {swaggerSpec} from "../utils/swagger.utils.js";
 
 const userData = testUsers.realEmail
-const email = userData.email
 
 const app = express()
 app.use(express.json())
@@ -80,8 +79,8 @@ describe('User:', (object, method) => {
 		// expect(response.status).toBe(200)
 	})
 
-	it('Checking the user in the database', async () => {
-		const user = await UserModel.findOne({email})
+	it('Checking the test user in the database', async () => {
+		const user = await UserModel.findOne({email: userData.email})
 		expect(user.email).toBe(userData.email)
 	})
 
@@ -93,10 +92,10 @@ describe('User:', (object, method) => {
 			.expect(200, done)
 	})
 
-	it('Deleting a user from the database', async () => {
-		const user = await UserModel.findOneAndDelete({email})
+	it('Deleting a test user from the database', async () => {
+		const user = await UserModel.findOneAndDelete({email: userData.email})
 		expect(user.email).toBe(userData.email)
-		const checkUser = await UserModel.findOne({email})
+		const checkUser = await UserModel.findOne({email: userData.email})
 		expect(checkUser).toBeFalsy()
 	})
 })

@@ -11,12 +11,12 @@ const swaggerDefinition = {
 			name: 'MIT License',
 			url: 'https://spdx.org/licenses/MIT.html',
 		},
-		contact: {
-			name: 'Vyacheslav',
-			url: 'https://github.com/Hashmann/AppJS-start-template/tree/master/server',
-			// description: 'Development server',
-			email: 'yarkov.slav@gmail.com',
-		},
+		// contact: {
+		// 	name: 'Vyacheslav',
+		// 	url: 'https://github.com/Hashmann/AppJS-start-template/tree/master/server',
+		// 	// description: 'Development server',
+		// 	email: 'yarkov.slav@gmail.com',
+		// },
 	},
 	servers: [
 		{
