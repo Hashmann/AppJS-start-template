@@ -1,11 +1,10 @@
 import mongoose from 'mongoose'
-import Role from './Role.js'
 
 /**
  * @swagger
  * components:
  *   schemas:
- *     User:
+ *     SettingsRoute:
  *       type: object
  *       required:
  *        - email
@@ -87,31 +86,16 @@ import Role from './Role.js'
  *           example: "12-05-2023"
  */
 
-const UserSchema = new mongoose.Schema({
-      email: {type: String, required: true, unique: true},
-      password: {type: String, required: true},
-      phone: {type: String},
-      roles: {type: [String], ref: 'Role', required: true, default: 'GUEST'},
+const SettingsRouteSchema = new mongoose.Schema({
+		title: {type: String, required: true, unique: true},
+		description: {type: String},
+		path: [{type: mongoose.Schema.Types.ObjectId, ref: 'Permission'}],
+		accessPerm: [{type: mongoose.Schema.Types.ObjectId, ref: 'Permission'}],
+		accessRole: [{type: mongoose.Schema.Types.ObjectId, ref: 'Role'}],
+		isAuth: {type: Boolean},
+	},
+	{
+		timestamps: true,
+	})
 
-      //TODO В отдельную таблицу
-      isActivated: {type: Boolean, default: false},
-      activationLink: {type: String},
-      activatedAt: {type: String, default: null},
-      //TODO END
-
-      nickName: {type: String},
-      surName: {type: String},
-      firstName: {type: String},
-      patronymic: {type: String},
-      birthDate: {type: String},
-      gender: {type: String},
-      avatarURL: {type: String},
-      isOnline: {type: String},
-
-      ban: {type: mongoose.Schema.Types.ObjectId, ref: 'Ban', default: null}
-    },
-    {
-      timestamps: true,
-    })
-
-export default mongoose.model('User', UserSchema)
+export default mongoose.model('SettingsRoute', SettingsRouteSchema)

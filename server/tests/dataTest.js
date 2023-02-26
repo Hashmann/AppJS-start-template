@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv'
 
 dotenv.config({ path: `.env${process.env.NODE_ENV}` })
 
@@ -11,5 +11,14 @@ export const testUsers = {
 	realEmail: {
 		email: process.env.TEST_REAL_EMAIL,
 		password: process.env.TEST_REAL_PASSWORD
+	}
+}
+
+export const testRoles = {
+	user: {
+		title: 'user',
+	},
+	admin: {
+		title: 'admin',
 	}
 }
