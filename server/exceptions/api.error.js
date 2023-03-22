@@ -8,10 +8,16 @@ export class ApiError extends Error {
     this.errors = errors
   }
 
+  static BadRequest(message, errors = []) {
+    return new ApiError(400, message, errors)
+  }
   static UnauthorizedError() {
     return new ApiError(401, 'Пользователь не авторизован')
   }
-  static BadRequest(message, errors = []) {
-    return new ApiError(400, message, errors)
+  static Forbidden() {
+    return new ApiError(403, 'Нет доступа')
+  }
+  static UnprocessableEntity(message, errors = []) {
+    return new ApiError(422, message, errors)
   }
 }

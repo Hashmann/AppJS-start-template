@@ -9,16 +9,13 @@ import mongoose from 'mongoose'
  *       required:
  *        - title
  *       properties:
- *         _id:
- *           type: integer
- *           example: 63e3a52807200ac23d9bada1
- *           description: The permission ID.
  *         title:
  *           type: string
  *           unique: true
  *           description: Permission title.
  *         description:
  *           type: string
+ *           default: null
  *           description: Description of the permission.
  *         createdAt:
  *           type: string
@@ -34,7 +31,7 @@ import mongoose from 'mongoose'
 
 const PermissionSchema = new mongoose.Schema({
 		title: {type: String, required: true, unique: true},
-		description: {type: String},
+		description: {type: String, default: null},
 	},
 	{
 		timestamps: true,

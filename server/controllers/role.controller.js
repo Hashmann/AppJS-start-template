@@ -10,12 +10,12 @@ class RoleController {
 			if (!errors.isEmpty()) {
 				return next(ApiError.BadRequest('Validation error', errors.array()))
 			}
-			const {title} = req.body
-			const role = await roleService.create(title.toUpperCase())
-			Logger.info(`Role: ${title.toUpperCase()} was successfully created`,'',`${req.ip}`,'DONE','v')
-			res.json({role, message: `Роль: ${title.toUpperCase()} была успешно создана`})
+			const roleData = {...req.body}
+			const role = await roleService.create(roleData)
+			Logger.info(`Role: ${role.title} was successfully created`,'role.controller',`${req.ip}`,'DONE','v')
+			res.json({role, message: `Роль: ${role.title} была успешно создана`})
 		} catch (err) {
-			Logger.error('Role Error', 'role.controller', `${req.ip}`, err, '')
+			Logger.error('Role Error', 'role.controller', `${req.ip}`, err, 'ERROR')
 			next(err)
 		}
 	}
@@ -27,16 +27,12 @@ class RoleController {
 				return next(ApiError.BadRequest('Validation error', errors.array()))
 			}
 			const roleId = req.params.id
-			//TODO перенести в сервис?!
-			const updateRole = {
-				title: req.body.title.toUpperCase(),
-				description: req.body.description
-			}
-			const role = await roleService.update(roleId, updateRole)
-			Logger.info(`Role id:${roleId} has been successfully updated`,'',`${req.ip}`,'DONE','v')
-			res.json({message: `Роль id:${roleId} была успешно обновлена`})
+			const roleData = {...req.body}
+			const role = await roleService.update(roleId, roleData)
+			Logger.info(`Role id:${roleId} has been successfully updated`,'role.controller',`${req.ip}`,'DONE','v')
+			res.json({role, message: `Роль id:${roleId} была успешно обновлена`})
 		} catch (err) {
-			Logger.error('Role Error', 'role.controller', `${req.ip}`, err, '')
+			Logger.error('Role Error', 'role.controller', `${req.ip}`, err, 'ERROR')
 			next(err)
 		}
 	}
@@ -45,10 +41,10 @@ class RoleController {
 		try {
 			const roleId = req.params.id
 			const role = await roleService.remove(roleId)
-			Logger.info(`Role id:${roleId} has been successfully deleted`,'',`${req.ip}`,'DONE','v')
-			res.json({message: `Роль id:${roleId} была успешно удалена`})
+			Logger.info(`Role id:${roleId} has been successfully deleted`,'role.controller',`${req.ip}`,'DONE','v')
+			res.json({role, message: `Роль id:${roleId} была успешно удалена`})
 		} catch (err) {
-			Logger.error('Role Error', 'role.controller', `${req.ip}`, err, '')
+			Logger.error('Role Error', 'role.controller', `${req.ip}`, err, 'ERROR')
 			next(err)
 		}
 	}
@@ -57,10 +53,10 @@ class RoleController {
 		try {
 			const roleId = req.params.id
 			const role = await roleService.getRole(roleId)
-			Logger.info(`Role id:${roleId} was successfully received`,'',`${req.ip}`,'DONE','v')
+			Logger.info(`Role id:${roleId} was successfully received`,'role.controller',`${req.ip}`,'DONE','v')
 			res.json({role, message: `Роль id:${roleId} была успешно получена`})
 		} catch (err) {
-			Logger.error('Role Error', 'role.controller', `${req.ip}`, err, '')
+			Logger.error('Role Error', 'role.controller', `${req.ip}`, err, 'ERROR')
 			next(err)
 		}
 	}
@@ -68,10 +64,10 @@ class RoleController {
 	async getAllRoles(req, res, next) {
 		try {
 			const roles = await roleService.getAllRoles()
-			Logger.info(`All roles were successfully received`,'',`${req.ip}`,'DONE','v')
+			Logger.info(`All roles were successfully received`,'role.controller',`${req.ip}`,'DONE','v')
 			res.json({roles, message: `Все роли были успешно получены`})
 		} catch (err) {
-			Logger.error('Role Error', 'role.controller', `${req.ip}`, err, '')
+			Logger.error('Role Error', 'role.controller', `${req.ip}`, err, 'ERROR')
 			next(err)
 		}
 	}

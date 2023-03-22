@@ -8,12 +8,10 @@ import mongoose, {Schema} from 'mongoose'
  *       type: object
  *       required:
  *        - refreshToken
+ *        - user
  *       properties:
- *         id:
- *           type: integer
- *           example: 6cda452rt5ty6
- *           description: The token ID.
  *         user:
+ *           type: object
  *           $ref: '#/components/schemas/User'
  *         refreshToken:
  *           type: string
@@ -41,8 +39,8 @@ import mongoose, {Schema} from 'mongoose'
 const TokenSchema = new mongoose.Schema({
       user: {type: Schema.Types.ObjectId, ref: 'User'},
       refreshToken: {type: String, required: true},
-      ip: {type: String},
-      fingerPrint: {type: String},
+      ip: {type: String, default: null},
+      fingerPrint: {type: String, default: null},
     },
     {
       timestamps: true,

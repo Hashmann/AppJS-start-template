@@ -5,7 +5,7 @@ import permissionsMiddleware from '../middlewares/permissions.middleware.js'
 
 const router = new Router()
 
-router.post('/create', permissionsMiddleware(['can-all', 'can-all-role', 'role-create']), roleValidation, roleController.create)
+router.post('/create', roleValidation, roleController.create) // permissionsMiddleware(['can-all', 'can-all-role', 'role-create']),
 /**
  * @swagger
  * /api/role/create:
@@ -68,7 +68,7 @@ router.post('/create', permissionsMiddleware(['can-all', 'can-all-role', 'role-c
  *        description: Unexpected error
  * */
 
-router.patch('/update/:id', permissionsMiddleware(['can-all', 'can-all-role', 'role-update']), roleValidation, roleController.update)
+router.patch('/update/:id', roleValidation, roleController.update) // permissionsMiddleware(['can-all', 'can-all-role', 'role-update']),
 /**
  * @swagger
  * /api/role/{id}:
@@ -125,7 +125,7 @@ router.patch('/update/:id', permissionsMiddleware(['can-all', 'can-all-role', 'r
  *       description: A string containing a JSON Pointer value.
  *  */
 
-router.delete('/remove/:id', permissionsMiddleware(['can-all', 'can-all-role', 'role-delete']), roleController.remove)
+router.delete('/remove/:id', roleController.remove) // permissionsMiddleware(['can-all', 'can-all-role', 'role-delete']),
 /**
  * @swagger
  * /api/role/{id}:
@@ -145,7 +145,7 @@ router.delete('/remove/:id', permissionsMiddleware(['can-all', 'can-all-role', '
  *              description: Role that was deleted
  */
 
-router.get('/', permissionsMiddleware(['can-all', 'can-all-role', 'roles-read']), roleController.getAllRoles)
+router.get('/', roleController.getAllRoles) // permissionsMiddleware(['can-all', 'can-all-role', 'roles-read']),
 /**
  * @swagger
  * /api/role/:
@@ -159,7 +159,7 @@ router.get('/', permissionsMiddleware(['can-all', 'can-all-role', 'roles-read'])
  *
  */
 
-router.get('/:id', permissionsMiddleware(['can-all', 'can-all-role', 'role-read']), roleController.getRole)
+router.get('/:id', roleController.getRole) // permissionsMiddleware(['can-all', 'can-all-role', 'role-read']),
 /**
  * @swagger
  * /api/role/{id}:

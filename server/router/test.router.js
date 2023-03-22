@@ -1,7 +1,9 @@
 import Router from 'express'
 import { testController } from '../controllers/test.controller.js'
-
+import { userController } from '../controllers/user.controller.js'
 import authMiddleware from '../middlewares/auth.middleware.js'
+import roleMiddleware from '../middlewares/role.middleware.js'
+import permissionsMiddleware from '../middlewares/permissions.middleware.js'
 
 const router = new Router()
 
@@ -94,5 +96,12 @@ router.post('/', testController.testPostRequest)
  *      500:
  *        description: Unexpected error
  * */
+
+// Tests
+router.get('/role', roleMiddleware(['SUPER-ADMIN', 'USER']), userController.getAllUsers)
+router.get('/role-perm', authMiddleware, roleMiddleware(['USER']), permissionsMiddleware(['can-all']), userController.getAllUsers) // authMiddleware,
+router.get('/perm', authMiddleware, permissionsMiddleware(['can-all', 'can-all-post']), userController.getAllUsers) // permissionsMiddleware(['can-all', 'post-create']),
+router.get('/auth', authMiddleware, userController.getAllUsers)
+// END Tests
 
 export const testRouter = router

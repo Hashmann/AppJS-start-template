@@ -11,6 +11,7 @@ import { swaggerSpec } from './utils/swagger.utils.js'
 import swaggerUi from 'swagger-ui-express'
 
 import errorMiddleware from './middlewares/error.middleware.js'
+import settingsMiddleware from './middlewares/settings.middleware.js'
 
 dotenv.config({ path: `.env${process.env.NODE_ENV}` })
 const PORT = process.env.PORT || 5000
@@ -18,19 +19,20 @@ const PORT = process.env.PORT || 5000
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors())
-
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {explorer: true}))
+// Settings middleware
+app.use(settingsMiddleware)
 // Routes
 app.use('/api', apiRoutes)
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {explorer: true}))
 
-//Middlewares
+//Error middleware
 app.use(errorMiddleware)
 // Launch server
 const start = async () => {
 	try {
-		// Connect DB
+		// Connect to DB
 		await dbConnect()
-		// Started server
+		// Start the server
 		httpServer.listen(PORT, () => {
 			Logger.info(`Server started on port:`, `${PORT}`, `${process.env.MODE}`,'LAUNCHED 🚀', 'v')
 		})

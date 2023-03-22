@@ -12,7 +12,7 @@ export default function (roles){
 			next()
 		}
 		try {
-			const accessToken = await tokenService.headerAccessToken(req)
+			const accessToken = await tokenService.getHeaderAccessToken(req)
 			const decodedToken = await tokenService.decodeToken(accessToken)
 			const userId = decodedToken.id
 			const user = await UserModel.findOne({_id: userId})
@@ -25,12 +25,12 @@ export default function (roles){
 			})
 			if (!hasRole) {
 				Logger.error('Roles does not match', 'role.middleware', `${req.ip}`, '', 'ACCESS DENIED')
-				return next(ApiError.UnauthorizedError())
+				return next(ApiError.Forbidden())
 			}
-			Logger.info('Roles is valid', 'role.middleware', `${req.ip}`, '', 'ACCESS')
+			Logger.info('Roles is valid', 'role.middleware', `${req.ip}`, 'ACCESS', 'v')
 			next()
 		} catch (err) {
-			Logger.error('Roles middleware error', 'role.middleware', `${req.ip}`, err, 'ACCESS DENIED')
+			Logger.error('Roles error', 'role.middleware', `${req.ip}`, err, 'ERROR')
 			return next(ApiError.UnauthorizedError())
 		}
 	}
