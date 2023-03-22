@@ -29,7 +29,7 @@ const swaggerDefinition = {
 const options = {
 	swaggerDefinition,
 	// Paths to files containing OpenAPI definitions
-	apis: ['./router/*.js', './models/*.js'],
+	apis: ['./router/*.js', './models/*.js', "./models/settings/*.js"],
 	// apis: ['./router/*.js'],
 }
 

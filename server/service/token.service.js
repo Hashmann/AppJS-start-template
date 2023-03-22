@@ -99,7 +99,7 @@ class TokenService {
   }
 
   // Get access token from headers
-  async headerAccessToken(req) {
+  async getHeaderAccessToken(req) {
     try {
       if (!req) return next(ApiError.BadRequest('Empty Request'))
       const accessToken = (req.headers.authorization || '').replace(/Bearer\s?/, '')

@@ -7,73 +7,27 @@ import mongoose from 'mongoose'
  *     Settings:
  *       type: object
  *       required:
- *        - email
- *        - password
+ *        - info
  *       properties:
- *         _id:
- *           type: integer
- *           example: 63e3a52807200ac23d9bada1
- *           description: User ID.
- *         email:
- *           type: string
- *           format: email
- *           unique: true
- *           example: user@mail.com
- *           description: User email.
- *         password:
- *           type: string
- *           format: password
- *           minLength: 3
- *           maxLength: 20
- *           description: User password.
- *         roles:
+ *         info:
+ *           type: object
+ *           default: {}
+ *           example: {}
+ *           description: Info app.
+ *         routes:
  *           type: array
  *           items:
- *             type: string
- *           default: user
- *           example: ['SUPER-ADMIN', 'ADMIN', 'MANAGER', 'GUEST', 'USER']
- *           description: User roles.
- *         avatarURL:
- *           type: string
- *           format: url
- *           description: The user's avatar link.
- *         surName:
- *           type: string
- *           minLength: 3
- *           maxLength: 20
- *           description: User surname.
- *         firstName:
- *           type: string
- *           minLength: 3
- *           maxLength: 20
- *           description: User firstname.
- *         patronymic:
- *           type: string
- *           minLength: 3
- *           maxLength: 20
- *           description: User patronymic.
- *         gender:
- *           type: string
- *           description: User gender.
- *         birthDate:
- *           type: string
- *           format: date
- *           example: "12-05-2023"
- *           description: The user's date of birth.
- *         isActivated:
- *           type: boolean
- *           default: false
- *           description: User activated.
- *         activationLink:
- *           type: string
- *           description: The user's activation link.
- *         activatedAt:
- *           type: string
- *           format: date-time
- *           description: Date and time activated account
- *         isOnline:
- *           type: string
- *           description: User online. 'true', 'false' or timestamp
+ *             type: object
+ *             $ref: '#/components/schemas/SettingsRoute'
+ *             format: GUID
+ *           default: []
+ *           example: ['ID_ROUTE', 'ID_ROUTE']
+ *           description: App routes.
+ *         settings:
+ *           type: object
+ *           default: {}
+ *           example: {}
+ *           description: App settings.
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -87,8 +41,9 @@ import mongoose from 'mongoose'
  */
 
 const SettingsSchema = new mongoose.Schema({
-		title: {type: String, required: true, unique: true},
-		routes: [{type: mongoose.Schema.Types.ObjectId, ref: 'SettingsRoute'}],
+		info: {type: Object, default: {}},
+		routes: [{type: mongoose.Schema.Types.ObjectId, ref: 'SettingsRoute', required: true}],
+		settings: {type: Object, required: true, default: {}},
 	},
 	{
 		timestamps: true,

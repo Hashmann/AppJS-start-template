@@ -7,73 +7,60 @@ import mongoose from 'mongoose'
  *     SettingsRoute:
  *       type: object
  *       required:
- *        - email
- *        - password
+ *        - routeUrl
+ *        - method
  *       properties:
- *         _id:
- *           type: integer
- *           example: 63e3a52807200ac23d9bada1
- *           description: User ID.
- *         email:
+ *         routeUrl:
  *           type: string
- *           format: email
  *           unique: true
- *           example: user@mail.com
- *           description: User email.
- *         password:
+ *           example: /api/user/:id
+ *           description: url.
+ *         description:
  *           type: string
- *           format: password
  *           minLength: 3
- *           maxLength: 20
- *           description: User password.
- *         roles:
+ *           maxLength: 30
+ *           default: null
+ *           description: Route description.
+ *         params:
+ *           type: string
+ *           default: null
+ *           example: 'id'
+ *           description: Url params('id' or 'link').
+ *         method:
+ *           type: string
+ *           default: 'GET'
+ *           example: POST
+ *           description: http method
+ *         controller:
+ *           type: string
+ *           default: null
+ *           example: 'userController.create'
+ *           description: Controller
+ *         accessPermList:
  *           type: array
  *           items:
- *             type: string
+ *             type: object
+ *             $ref: '#/components/schemas/Permission'
+ *             format: GUID
  *           default: user
- *           example: ['SUPER-ADMIN', 'ADMIN', 'MANAGER', 'GUEST', 'USER']
- *           description: User roles.
- *         avatarURL:
- *           type: string
- *           format: url
- *           description: The user's avatar link.
- *         surName:
- *           type: string
- *           minLength: 3
- *           maxLength: 20
- *           description: User surname.
- *         firstName:
- *           type: string
- *           minLength: 3
- *           maxLength: 20
- *           description: User firstname.
- *         patronymic:
- *           type: string
- *           minLength: 3
- *           maxLength: 20
- *           description: User patronymic.
- *         gender:
- *           type: string
- *           description: User gender.
- *         birthDate:
- *           type: string
- *           format: date
- *           example: "12-05-2023"
- *           description: The user's date of birth.
- *         isActivated:
+ *           example: ['ID_PERMISSION']
+ *           description: Route access permissions list.
+ *         accessRoleList:
+ *           type: array
+ *           items:
+ *             type: object
+ *             $ref: '#/components/schemas/Role'
+ *             format: GUID
+ *           default: user
+ *           example: ['ID_ROLE', 'ID_ROLE']
+ *           description: Route access roles list.
+ *         isCheckAuth:
  *           type: boolean
  *           default: false
- *           description: User activated.
- *         activationLink:
- *           type: string
- *           description: The user's activation link.
- *         activatedAt:
- *           type: string
- *           format: date-time
- *           description: Date and time activated account
- *         isOnline:
- *           type: string
- *           description: User online. 'true', 'false' or timestamp
+ *           description: User patronymic.
+ *         isCheckBan:
+ *           type: boolean
+ *           default: false
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -87,15 +74,18 @@ import mongoose from 'mongoose'
  */
 
 const SettingsRouteSchema = new mongoose.Schema({
-		title: {type: String, required: true, unique: true},
-		description: {type: String},
-		path: [{type: mongoose.Schema.Types.ObjectId, ref: 'Permission'}],
-		accessPerm: [{type: mongoose.Schema.Types.ObjectId, ref: 'Permission'}],
-		accessRole: [{type: mongoose.Schema.Types.ObjectId, ref: 'Role'}],
-		isAuth: {type: Boolean},
+		routeUrl: {type: String, required: true},
+		description: {type: String, default: null},
+		params: {type: String, default: null},
+		method: {type: String, required: true, default: 'GET'},
+		controller: {type: String, required: true, default: null},
+		accessPermList: [{type: mongoose.Schema.Types.ObjectId, ref: 'Permission', default: null}],
+		accessRoleList: [{type: mongoose.Schema.Types.ObjectId, ref: 'Role', default: null}],
+		isCheckAuth: {type: Boolean, default: false},
+		isCheckBan: {type: Boolean, default: false},
 	},
 	{
 		timestamps: true,
 	})
 
-export default mongoose.model('SettingsRoute', SettingsRouteSchema)
+export default mongoose.model('Settings.Route', SettingsRouteSchema)

@@ -10,10 +10,10 @@
    <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
-<div align="center"><h2>About[^1]</h2></div>
+<div align="center"><h2>
 
-About[^1]
-
+[^1] About
+</h2></div>
 
 ```
 About Text Here.
@@ -23,7 +23,10 @@ About Text Here.
 API documentation is available at `http://localhost:5000/api/docs` after starting server in **dev mode** <code>npm run start:dev</code>.
 You can also read the documentation `/server/docs/api-documentation.pdf`
 
-<div align="center"><h2>Features</h2></div>
+<div align="center"><h2>
+
+[^2] Features 
+</h2></div>
 
 <ul>
 <li>Login, register, email verification and password reset</li>
@@ -31,40 +34,31 @@ You can also read the documentation `/server/docs/api-documentation.pdf`
 <li>Roles and permissions user</li>
 </ul>
 
-<div align="center"><h2>TODO</h2></div>
+<div align="center"><h2>
 
-<details>
-  <summary>List one</summary>
-
-- [ ] Todo1
-- [ ] Todo2
-- [ ] Todo3
-</details>
-
-<details>
-  <summary>List two</summary>
-
-- [ ] Todo4
-- [ ] Todo5
-- [ ] Todo6
-</details>
-
-- [x] Add delight to the experience when all tasks are complete :tada:
-
-
-<div align="center"><h2>Installation</h2></div>
+[^3] Installation
+</h2></div>
 
 ```
 git clone https://github.com/Hashmann/AppJS-start-template.git
 ```
-<ul>
-<li><code></code></li>
-<li>Edit <code>.env.production</code> <code>.env.development</code> and set your database connection details and other settings</li>
-<li><code>npm install</code></li>
-<li><code>npm run migrate</code></li>
-</ul>
+- Go to the `/server` folder
+- Edit `.env.production` `.env.development` and set your database connection details and other settings
+```
+npm install
+```
+```
+npm run migrate
+```
 
-<div align="center"><h2>Usage</h2></div>
+<!-- <ul>
+<li><code>test</code></li>
+</ul> -->
+
+<div align="center"><h2>
+
+[^4] Usage
+</h2></div>
 
 <details>
   <summary>Testing</summary>
@@ -86,7 +80,10 @@ Edit <code>.env.test</code> and set your test database connection details and ot
 <code>npm run start</code>
 </details>
 
-<div align="center"><h2>Dependencies</h2></div>
+<div align="center"><h2>
+
+[^5] Dependencies 
+</h2></div>
 
 <details>
   <summary>Production</summary>
@@ -98,6 +95,29 @@ Edit <code>.env.test</code> and set your test database connection details and ot
 - [MongoDB (npm)](https://www.npmjs.com/package/mongodb) ^4.13.0
 - [Mongoose (npm)](https://www.npmjs.com/package/mongoose) ^6.9.0
 </details>
+
+<div align="center"><h2>
+
+[^6] TODO
+</h2></div>
+
+<details>
+  <summary>List one</summary>
+
+- [ ] Todo1
+- [ ] Todo2
+- [ ] Todo3
+</details>
+
+<details>
+  <summary>List two</summary>
+
+- [ ] Todo4
+- [ ] Todo5
+- [ ] Todo6
+</details>
+
+- [x] Add delight to the experience when all tasks are complete :tada:
 
 <details>
   <summary>Development</summary>
@@ -113,8 +133,12 @@ Edit <code>.env.test</code> and set your test database connection details and ot
 
 [MIT license](https://opensource.org/licenses/MIT)
 
-***
 <div align="center"><sub align="center">2023</sub></div>
 
-[^1]: About.
+[^1]: About
+[^2]: Features
+[^3]: Installation
+[^4]: Usage
+[^5]: Dependencies
+[^6]: TODO
 

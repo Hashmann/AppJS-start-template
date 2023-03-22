@@ -13,19 +13,26 @@ export default function (permissions){
 			next()
 		}
 		try {
-			const accessToken = await tokenService.headerAccessToken(req)
+			const accessToken = await tokenService.getHeaderAccessToken(req)
 			const decodedToken = await tokenService.decodeToken(accessToken)
 			const userId = decodedToken.id
 			const user = await UserModel.findOne({_id: userId})
-			const userRoles = user.roles
-			let userPermissions = []
-			for (let i = 0; i < userRoles.length; i++) {
-				const role = await RoleModel.findOne({title: userRoles[i]})
-				const rolePermissions = role.permissions
-				for (let j = 0; j < rolePermissions.length; j++) {
-					if ( !(userPermissions.includes(rolePermissions[j])) ) {
-						userPermissions.push(rolePermissions[j])
-					}
+				.populate({
+				path: 'roles',
+				populate: {
+					path: 'permissions',
+					model: 'Permission'
+				}
+			}).exec()
+			const userRoles = []
+			for (let role in user.roles) {
+				userRoles.push(user.roles[role].title)
+			}
+			const userPermissions = []
+			for (let userRole in userRoles) {
+				const role = await RoleModel.findOne({title: userRoles[userRole]}).populate('permissions').exec()
+				for (let permission in role.permissions) {
+					userPermissions.push(role.permissions[permission].title)
 				}
 			}
 			let hasPermission = false
@@ -36,12 +43,12 @@ export default function (permissions){
 			})
 			if (!hasPermission) {
 				Logger.error('Permissions does not match', 'permissions.middleware', `${req.ip}`, '', 'ACCESS DENIED')
-				return next(ApiError.UnauthorizedError())
+				return next(ApiError.Forbidden())
 			}
 			Logger.info('Permissions is valid', 'permissions.middleware', `${req.ip}`, 'ACCESS', 'v')
 			next()
 		} catch (err) {
-			Logger.error('Permissions middleware error', 'permissions.middleware', `${req.ip}`, err, 'ACCESS DENIED')
+			Logger.error('Permissions error', 'permissions.middleware', `${req.ip}`, err, 'ERROR')
 			return next(ApiError.UnauthorizedError())
 		}
 	}

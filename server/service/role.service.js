@@ -1,61 +1,53 @@
 import RoleModel from '../models/Role.js'
 import { ApiError } from '../exceptions/api.error.js'
-import { Logger } from '../utils/logger.utils.js'
+import {
+	trimStringObjData,
+	verifyIdLength
+} from '../utils/utils.js'
 
 class RoleService {
-	async create(title) {
-		const role = await RoleModel.findOne({title})
-		if (role) {
-			// Logger.warning(`The role: ${title} already exists`,'','','')
-			throw ApiError.BadRequest(`Такая роль: ${title} уже существует`)
-		}
-		const newRole = await RoleModel.create({title})
-		return newRole
-		// return await RoleModel.create({title})
+	async create(roleData) {
+		const role = await RoleModel.findOne({title: roleData.title})
+		if (role) throw ApiError.BadRequest(`Такая роль: ${role.title} уже существует`)
+		roleData = trimStringObjData(roleData)
+		roleData['title'] = roleData['title'].toUpperCase()
+		return await RoleModel.create(roleData)
 	}
 
-	async update(roleId, updateRole) {
-		//TODO вынести в отдельную функцию ???нужна ли эта проверка???
-		if (roleId.length < 24 || roleId.length > 24) {
-			throw ApiError.BadRequest(`Недопустимый идентификатор`)
-		}
-		//TODO END
+	async update(roleId, roleData) {
+		verifyIdLength(roleId)
 		const roleById = await RoleModel.findById(roleId)
-		if (!roleById) {
-			throw ApiError.BadRequest(`Такой роли не существует`)
-		}
-		await RoleModel.updateOne({
-			_id: roleId,
-		},{
-			title: updateRole.title,
-			description: updateRole.description,
-		})
+		if (!roleById) throw ApiError.BadRequest(`Такой роли не существует`)
+		if (roleById.title === 'ADMIN' || roleById.title === 'SUPER-ADMIN') throw ApiError.BadRequest(`Эту роль изменить нельзя`)
+		roleData = trimStringObjData(roleData)
+		roleData['title'] = roleData['title'].toUpperCase()
+		const roleUpdate = await RoleModel.findByIdAndUpdate(roleId, roleData, {returnDocument: 'after'})
+			.populate('permissions')
+		return roleUpdate
 	}
 
 	async remove(roleId) {
-		if (roleId.length < 24 || roleId.length > 24) {
-			throw ApiError.BadRequest(`Недопустимый идентификатор`)
-		}
+		verifyIdLength(roleId)
 		const roleById = await RoleModel.findById(roleId)
-		if (!roleById) {
-			throw ApiError.BadRequest(`Такой роли не существует`)
-		}
-		await RoleModel.findOneAndDelete(roleId)
+		if (!roleById) throw ApiError.BadRequest(`Такой роли не существует`)
+		if (roleById.title === 'SUPER-ADMIN' ||
+			roleById.title === 'ADMIN' ||
+			roleById.title === 'MANAGER' ||
+			roleById.title === 'USER' ||
+			roleById.title === 'GUEST') throw ApiError.BadRequest(`Эту роль удалить нельзя`)
+		const roleDelete = await RoleModel.findByIdAndDelete(roleId).populate('permissions')
+		return roleDelete
 	}
 
 	async getRole (roleId) {
-		if (roleId.length < 24 || roleId.length > 24) {
-			throw ApiError.BadRequest(`Недопустимый идентификатор`)
-		}
-		const roleById = await RoleModel.findById(roleId)
-		if (!roleById) {
-			throw ApiError.BadRequest(`Такой роли не существует`)
-		}
+		verifyIdLength(roleId)
+		const roleById = await RoleModel.findById(roleId).populate('permissions')
+		if (!roleById) throw ApiError.BadRequest(`Такой роли не существует`)
 		return roleById
 	}
 
 	async getAllRoles () {
-		const roles = await RoleModel.find()
+		const roles = await RoleModel.find().populate('permissions')
 		return roles
 	}
 }

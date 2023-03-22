@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import Permission from './Permission.js'
+import mongoose, {Schema} from 'mongoose'
+import { slugGenerator } from '../utils/utils.js'
 
 /**
  * @swagger
@@ -9,29 +9,29 @@ import Permission from './Permission.js'
  *       type: object
  *       required:
  *        - title
+ *        - slug
  *        - content
- *        - user
+ *        - author
  *       properties:
- *         _id:
- *           type: integer
- *           example: 63e3a52807200ac23d9bada1
- *           description: Post ID.
  *         title:
  *           type: string
  *           unique: true
  *           description: Post title.
+ *         slug:
+ *           type: string
+ *           unique: true
+ *           description: Post slug.
  *         content:
  *           type: string
  *         tags:
  *           type: array
  *           items:
- *             type: string
+ *             type: object
+ *             $ref: '#/components/schemas/Tag'
  *           example: ['post', 'tag']
+ *           default: []
  *           description: Post tags.
- *         viewsCount:
- *           type: number
- *           description: Post view counter.
- *         user:
+ *         author:
  *           type: object
  *           $ref: '#/components/schemas/User'
  *           description: Post creator.
@@ -39,7 +39,54 @@ import Permission from './Permission.js'
  *           type: string
  *           format: URL
  *           example: /link
+ *           default: null
  *           description: Link to image.
+ *         isPublished:
+ *           type: boolean
+ *           example: false
+ *           default: false
+ *           description: Is published?.
+ *         viewsCount:
+ *           type: number
+ *           default: 0
+ *           example: 0
+ *           description: Count of post views.
+ *         likeList:
+ *           type: array
+ *           items:
+ *             type: object
+ *             $ref: '#/components/schemas/User'
+ *             format: GUID
+ *           example: ['63ff446467f7015de43dfeb9', '63ff446467f7015de43dfec3', '63ff446467f7015de43dfebe']
+ *           default: null
+ *           description: List users like.
+ *         dislikeList:
+ *           type: array
+ *           items:
+ *             type: object
+ *             $ref: '#/components/schemas/User'
+ *             format: GUID
+ *           example: ['63ff446467f7015de43dfeb9', '63ff446467f7015de43dfec3', '63ff446467f7015de43dfebe']
+ *           default: null
+ *           description: List users dislike.
+ *         wishList:
+ *           type: array
+ *           items:
+ *             type: object
+ *             $ref: '#/components/schemas/User'
+ *             format: GUID
+ *           example: ['63ff446467f7015de43dfeb9', '63ff446467f7015de43dfec3', '63ff446467f7015de43dfebe']
+ *           default: null
+ *           description: Wishlist users.
+ *         comments:
+ *           type: array
+ *           items:
+ *             type: object
+ *             $ref: '#/components/schemas/Comment'
+ *             format: GUID
+ *           example: ['63ff446467f7015de43dfeb9', '63ff446467f7015de43dfec3', '63ff446467f7015de43dfebe']
+ *           default: null
+ *           description: Comments.
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -54,11 +101,25 @@ import Permission from './Permission.js'
 
 const PostSchema = new mongoose.Schema({
 		title: {type: String, required: true, unique: true},
+		slug: {
+			type: String,
+			required: true,
+			unique: true,
+			// default: function() {
+			// 	return slugGenerator(this.title)
+			// }
+		},
 		content: {type: String, required: true},
-		tags: {type: Array, default: [],},
-		viewsCount: {type: Number, default: 0,},
-		user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
-		imageUrl: {type: String},
+		tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag', default: null,}],
+		category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true},
+		author: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+		imageUrl: {type: String, default: null},
+		isPublished: {type: Boolean, default: true},
+		viewsCount: {type: Number, default: 0},
+		likeList: [{type: Schema.Types.ObjectId, ref: 'User', default: null}],
+		dislikeList: [{type: Schema.Types.ObjectId, ref: 'User', default: null}],
+		wishList: [{type: Schema.Types.ObjectId, ref: 'User', default: null}],
+		comments: [{type: Schema.Types.ObjectId, ref: 'Comment', default: null}],
 	},
 	{
 		timestamps: true,

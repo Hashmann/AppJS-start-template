@@ -7,7 +7,8 @@ dotenv.config({ path: `.env${process.env.NODE_ENV}` })
 
 export default async function (req, res, next){
 	try {
-		const accessToken = await tokenService.headerAccessToken(req)
+		// console.log('req.params', req.params)
+		const accessToken = await tokenService.getHeaderAccessToken(req)
 		const { refreshToken } = req.cookies
 		const userData = await tokenService.validateAccessToken(accessToken, res)
 		if (!userData) {
@@ -16,6 +17,8 @@ export default async function (req, res, next){
 		}
 		req.user = userData
 		Logger.info('Auth is valid', 'auth.middleware', `${req.ip}`, 'ACCESS', 'v')
+		// const url = req.originalUrl
+		// const route = await SettingsRouteModel.findOne({urlPath: url}).populate('accessPerm').exec()
 		next()
 	} catch (err) {
 		Logger.error('Auth middleware error', 'auth.middleware', `${req.ip}`, err, 'ACCESS DENIED')

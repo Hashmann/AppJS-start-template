@@ -11,15 +11,17 @@ import Permission from './Permission.js'
  *        - title
  *        - permissions
  *       properties:
- *         _id:
- *           type: integer
- *           example: 63e3a52807200ac23d9bada1
- *           description: Role ID.
  *         title:
  *           type: string
  *           unique: true
  *           example: USER
  *           description: Role title.
+ *         parentRole:
+ *           type: object
+ *           properties:
+ *             $ref: '#/components/schemas/Role'
+ *           default: null
+ *           description: Parent role ID.
  *         permissions:
  *           type: array
  *           items:
@@ -28,6 +30,7 @@ import Permission from './Permission.js'
  *           description: Role permissions.
  *         description:
  *           type: string
+ *           default: null
  *           description: Description of the role.
  *         createdAt:
  *           type: string
@@ -43,8 +46,9 @@ import Permission from './Permission.js'
 
 const RoleSchema = new mongoose.Schema({
 		title: {type: String, required: true, unique: true},
-		permissions: [{type: String, ref: 'Permission', required: true}],
-		description: {type: String},
+		parentRole: {type: mongoose.Schema.Types.ObjectId, ref: 'Role', default: null},
+		permissions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Permission', required: true}],
+		description: {type: String, default: null},
 	},
 	{
 		timestamps: true,

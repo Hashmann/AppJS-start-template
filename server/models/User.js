@@ -1,5 +1,24 @@
-import mongoose from 'mongoose'
-import Role from './Role.js'
+import mongoose, {Schema} from 'mongoose'
+
+const UserSchema = new mongoose.Schema({
+      email: {type: String, required: true, unique: true},
+      password: {type: String, required: true},
+      resetPassLink: {type: String},
+      roles: [{type: mongoose.Schema.Types.ObjectId, ref: 'Role' }], // {type: [String], ref: 'Role', required: true, default: 'GUEST'},
+      isActivated: {type: Boolean, default: false},
+      activationLink: {type: String},
+      activatedAt: {type: String, default: null},
+      isOnline: {type: String, default: null},  // ????
+      viewsCount: {type: Number, default: 0},
+      likeList: [{type: Schema.Types.ObjectId, ref: 'User', default: null}],
+      dislikeList: [{type: Schema.Types.ObjectId, ref: 'User', default: null}],
+      banList: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ban', default: null}],
+    },
+    {
+      timestamps: true,
+    })
+
+export default mongoose.model('User', UserSchema)
 
 /**
  * @swagger
@@ -11,10 +30,6 @@ import Role from './Role.js'
  *        - email
  *        - password
  *       properties:
- *         _id:
- *           type: integer
- *           example: 63e3a52807200ac23d9bada1
- *           description: User ID.
  *         email:
  *           type: string
  *           format: email
@@ -27,40 +42,17 @@ import Role from './Role.js'
  *           minLength: 3
  *           maxLength: 20
  *           description: User password.
+ *         resetPassLink:
+ *           type: string
+ *           description: The user's activation link.
  *         roles:
  *           type: array
  *           items:
- *             type: string
- *           default: user
- *           example: ['SUPER-ADMIN', 'ADMIN', 'MANAGER', 'GUEST', 'USER']
+ *             type: object
+ *             $ref: '#/components/schemas/Role'
+ *             format: GUID
+ *           example: [{ID_SUPER-ADMIN}, {ID_ADMIN}, {ID_MANAGER}, {ID_GUEST}, {ID_USER}]
  *           description: User roles.
- *         avatarURL:
- *           type: string
- *           format: url
- *           description: The user's avatar link.
- *         surName:
- *           type: string
- *           minLength: 3
- *           maxLength: 20
- *           description: User surname.
- *         firstName:
- *           type: string
- *           minLength: 3
- *           maxLength: 20
- *           description: User firstname.
- *         patronymic:
- *           type: string
- *           minLength: 3
- *           maxLength: 20
- *           description: User patronymic.
- *         gender:
- *           type: string
- *           description: User gender.
- *         birthDate:
- *           type: string
- *           format: date
- *           example: "12-05-2023"
- *           description: The user's date of birth.
  *         isActivated:
  *           type: boolean
  *           default: false
@@ -71,10 +63,44 @@ import Role from './Role.js'
  *         activatedAt:
  *           type: string
  *           format: date-time
+ *           default: null
  *           description: Date and time activated account
  *         isOnline:
  *           type: string
+ *           default: null
  *           description: User online. 'true', 'false' or timestamp
+ *         viewsCount:
+ *           type: number
+ *           default: 0
+ *           example: 0
+ *           description: Count of user views.
+ *         likeList:
+ *           type: array
+ *           items:
+ *             type: object
+ *             $ref: '#/components/schemas/User'
+ *             format: GUID
+ *           example: [{63ff446467f7015de43dfeb9}, {63ff446467f7015de43dfec3}, {63ff446467f7015de43dfebe}]
+ *           default: null
+ *           description: List users like.
+ *         dislikeList:
+ *           type: array
+ *           items:
+ *             type: object
+ *             $ref: '#/components/schemas/User'
+ *             format: GUID
+ *           example: [{63ff446467f7015de43dfeb9}, {63ff446467f7015de43dfec3}, {63ff446467f7015de43dfebe}]
+ *           default: null
+ *           description: List users dislike.
+ *         banList:
+ *           type: array
+ *           items:
+ *             type: object
+ *             $ref: '#/components/schemas/Ban'
+ *             format: GUID
+ *           example: [{63ff446467f7015de43dfeb9}, {63ff446467f7015de43dfec3}, {63ff446467f7015de43dfebe}]
+ *           default: null
+ *           description: List users ban.
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -87,31 +113,37 @@ import Role from './Role.js'
  *           example: "12-05-2023"
  */
 
-const UserSchema = new mongoose.Schema({
-      email: {type: String, required: true, unique: true},
-      password: {type: String, required: true},
-      phone: {type: String},
-      roles: {type: [String], ref: 'Role', required: true, default: 'GUEST'},
-
-      //TODO В отдельную таблицу
-      isActivated: {type: Boolean, default: false},
-      activationLink: {type: String},
-      activatedAt: {type: String, default: null},
-      //TODO END
-
-      nickName: {type: String},
-      surName: {type: String},
-      firstName: {type: String},
-      patronymic: {type: String},
-      birthDate: {type: String},
-      gender: {type: String},
-      avatarURL: {type: String},
-      isOnline: {type: String},
-
-      ban: {type: mongoose.Schema.Types.ObjectId, ref: 'Ban', default: null}
-    },
-    {
-      timestamps: true,
-    })
-
-export default mongoose.model('User', UserSchema)
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     UserDTO:
+ *       type: object
+ *       required:
+ *       properties:
+ *         _id:
+ *           type: string
+ *           unique: true
+ *           example: 63ff446467f7015de43dfeaf
+ *           description: User ID.
+ *         email:
+ *           type: string
+ *           format: email
+ *           unique: true
+ *           example: user@mail.com
+ *           description: User email.
+ *         isActivated:
+ *           type: boolean
+ *           default: false
+ *           description: User activated.
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp of user created.
+ *           example: "12-05-2023"
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp of user updated.
+ *           example: "12-05-2023"
+ */
