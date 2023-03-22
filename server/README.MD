@@ -135,8 +135,7 @@ Edit <code>.env.test</code> and set your test database connection details and ot
 
 <div align="center"><sub align="center">2023</sub></div>
 
-[^1]: About
-[^2]: Features
+[^1]: About [^2]: Features
 [^3]: Installation
 [^4]: Usage
 [^5]: Dependencies
